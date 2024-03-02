@@ -1,5 +1,8 @@
-package com.aeritt.yue.template;
+package com.aeritt.yue.verification;
 
+import com.aeritt.yue.api.config.ConfigService;
+import com.aeritt.yue.verification.config.SettingsConfig;
+import com.aeritt.yue.verification.config.step.StepConfig;
 import org.pf4j.PluginWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -10,12 +13,21 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 @Configuration
-public class TemplateConfiguration {
+public class VerificationConfiguration {
 	private final ApplicationContext ctx;
 
 	@Autowired
-	public TemplateConfiguration(ApplicationContext ctx) {
+	public VerificationConfiguration(ApplicationContext ctx) {
 		this.ctx = ctx;
+
+		registerConfigs();
+	}
+
+	public void registerConfigs() {
+		ConfigService configService = ctx.getBean(ConfigService.class);
+
+		configService.registerConfig(SettingsConfig.class, "", "settings.json");
+		configService.registerConfig(StepConfig.class, "", "steps.json");
 	}
 
 	@Bean

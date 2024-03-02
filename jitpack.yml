@@ -1,0 +1,7 @@
+before_install:
+  - sdk update
+  - sdk install java 17.0.10-librca
+  - sdk use java 17.0.10-librca
+  - sdk install maven
+install:
+  - mvn -pl api install -DskipTests

@@ -5,12 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.aeritt</groupId>
-    <artifactId>Template</artifactId>
+    <artifactId>Verification</artifactId>
     <version>0.0.1</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>api</module>
+        <module>plugin</module>
+    </modules>
 
     <properties>
         <!-- Project config -->
-        <testDirectory>${project.build.directory}/../../Yue/test/plugins</testDirectory>
+        <testDirectory>${project.build.directory}/../../../Yue/test/plugins</testDirectory>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
@@ -23,10 +29,12 @@
         <maven.compiler.version>3.12.1</maven.compiler.version>
         <maven.jar.version>3.3.0</maven.jar.version>
         <maven.antrun.version>3.1.0</maven.antrun.version>
+        <maven.javadoc.version>3.6.3</maven.javadoc.version>
+        <maven.shade.version>3.5.2</maven.shade.version>
 
         <!-- Plugin properties -->
-        <plugin.id>template</plugin.id>
-        <plugin.class>com.aeritt.yue.template.TemplatePlugin</plugin.class>
+        <plugin.id>verification</plugin.id>
+        <plugin.class>com.aeritt.yue.verification.Verification</plugin.class>
         <plugin.version>0.0.1</plugin.version>
         <plugin.provider>whereareiam</plugin.provider>
         <plugin.dependencies/>
@@ -35,44 +43,10 @@
     <profiles>
         <profile>
             <id>dev</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>${maven.antrun.version}</version>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <configuration>
-                                    <target>
-                                        <move file="${project.build.directory}/${project.artifactId}-${project.version}.jar"
-                                              tofile="${testDirectory}/${project.artifactId}.jar"/>
-                                    </target>
-                                </configuration>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
         </profile>
     </profiles>
 
     <dependencies>
-        <dependency>
-            <groupId>com.github.aerittopia</groupId>
-            <artifactId>Yue</artifactId>
-            <version>dev-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.pf4j</groupId>
-            <artifactId>pf4j-spring</artifactId>
-            <version>${pf4j-spring.version}</version>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
@@ -86,37 +60,6 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler.version}</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>${maven.jar.version}</version>
-                <configuration>
-                    <archive>
-                        <manifestEntries>
-                            <Plugin-Id>${plugin.id}</Plugin-Id>
-                            <Plugin-Class>${plugin.class}</Plugin-Class>
-                            <Plugin-Version>${plugin.version}</Plugin-Version>
-                            <Plugin-Provider>${plugin.provider}</Plugin-Provider>
-                            <Plugin-Dependencies>${plugin.dependencies}</Plugin-Dependencies>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>
-        </plugins>
-        <finalName>${project.artifactId}-${project.version}</finalName>
-    </build>
 
     <repositories>
         <!-- YueAPI -->
