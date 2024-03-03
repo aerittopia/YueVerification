@@ -7,7 +7,7 @@ import net.dv8tion.jda.api.entities.User;
 public interface StepService {
 	void verifyUser(User user);
 
-	void nextStep(User user);
+	void nextStep(StepData stepData);
 
 	void forceNextStep(User user, Step step);
 

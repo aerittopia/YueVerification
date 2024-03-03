@@ -80,7 +80,7 @@ public class AdditionalLanguageStep extends Step {
 			List<String> additionalLanguages = stepData.getAdditionalLanguages();
 			additionalLanguages.forEach(language -> personLanguageService.addAdditionalLanguage(stepData.getUser().getId(), language));
 
-			stepService.nextStep(stepData.getUser());
+			stepService.nextStep(stepData);
 			return;
 		}
 
@@ -89,7 +89,7 @@ public class AdditionalLanguageStep extends Step {
 			Optional<String> language = languages.stream().filter(lang -> lang.equals(langCode)).findFirst();
 			language.ifPresent(stepData.getAdditionalLanguages()::add);
 
-			stepService.nextStep(stepData.getUser());
+			stepService.nextStep(stepData);
 		}
 	}
 

@@ -84,7 +84,7 @@ public class AcknowledgementStep extends Step {
 		if (stepData.getStep() != this) return;
 
 		stepData.setNextAllowed(true);
-		stepService.nextStep(stepData.getUser());
+		stepService.nextStep(stepData);
 	}
 
 	@Override

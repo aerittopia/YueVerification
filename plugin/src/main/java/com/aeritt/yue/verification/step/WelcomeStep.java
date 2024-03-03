@@ -50,7 +50,7 @@ public class WelcomeStep extends Step {
 				privateChannel -> privateChannel.sendMessageEmbeds(embed)
 		).queue(stepData::setMessage);
 
-		stepService.nextStep(stepData.getUser());
+		stepService.nextStep(stepData);
 	}
 
 	@Override

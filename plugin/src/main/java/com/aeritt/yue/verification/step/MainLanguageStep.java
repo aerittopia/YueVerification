@@ -61,9 +61,11 @@ public class MainLanguageStep extends Step {
 		buttonManager.addButton(continueButton.getId(), this::handleContinueButton);
 		buttons.add(continueButton);
 
-		stepData.setMainLanguage(languages.stream().filter(
-				language -> language.equals(languageService.getDefaultLanguage())
-		).findFirst().orElseThrow());
+		if (stepData.getMainLanguage() == null)
+			stepData.setMainLanguage(languages.stream().filter(
+					language -> language.equals(languageService.getDefaultLanguage())
+			).findFirst().orElseThrow());
+
 		stepData.setStep(this);
 
 		if (!personService.userExists(stepData.getUser().getId())) {
@@ -100,7 +102,7 @@ public class MainLanguageStep extends Step {
 		stepData.setMainLanguage(language.get());
 
 		personService.getPersonLanguageService().setLanguage(stepData.getUser().getId(), language.get());
-		stepService.nextStep(stepData.getUser());
+		stepService.nextStep(stepData);
 	}
 
 	private void handleContinueButton(ButtonInteractionEvent event) {
@@ -110,7 +112,7 @@ public class MainLanguageStep extends Step {
 		if (!buttonId.equals(stepConfig.getMainLanguage().getContinueButtonId())) return;
 
 		stepData.setNextAllowed(true);
-		stepService.nextStep(stepData.getUser());
+		stepService.nextStep(stepData);
 	}
 
 	@Override

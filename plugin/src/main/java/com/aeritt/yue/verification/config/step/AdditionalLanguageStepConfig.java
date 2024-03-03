@@ -5,5 +5,5 @@ import lombok.Getter;
 @Getter
 public class AdditionalLanguageStepConfig {
 	private String embedId = "verification.embed.verification.additionalLanguage";
-	private String continueButtonId = "core.button.default.continue";
+	private String continueButtonId = "verification.button.verification.additionalLanguage.continue";
 }

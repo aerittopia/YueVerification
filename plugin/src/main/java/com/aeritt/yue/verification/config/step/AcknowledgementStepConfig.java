@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public class AcknowledgementStepConfig {
-	private String acknowledgementEmbedId = "core.embed.default.acknowledgement";
+	private String acknowledgementEmbedId = "core.embed.acknowledgement.information";
 	private String acceptationEmbedId = "verification.embed.verification.acceptation";
-	private String readButtonId = "core.button.default.read";
-	private String acceptButtonId = "core.button.default.accept";
+	private String readButtonId = "verification.button.verification.acceptation.read";
+	private String acceptButtonId = "verification.button.verification.acceptation.accept";
 }
